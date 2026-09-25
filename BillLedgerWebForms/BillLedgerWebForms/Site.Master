@@ -1,0 +1,157 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.Master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>BillRemind</title>
+    <link href="Content/site.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <script type="text/javascript">
+            var brsAlerts = <asp:Literal ID="litNotifyData" runat="server" Text="[]" />;
+        </script>
+        <div class="app">
+            <div class="sidebar" id="sidebar" runat="server">
+                <div class="brand">
+                    <span class="brand-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+                    </span>
+                    <span class="brand-text">BillRemind</span>
+                </div>
+                <div class="navgroup">
+                    <a class="navitem" id="navDashboard" runat="server" href="Dashboard.aspx">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="5" rx="1.5"/><rect x="13" y="11" width="8" height="10" rx="1.5"/><rect x="3" y="14" width="8" height="7" rx="1.5"/></svg>
+                        <span class="navlabel">Dashboard</span>
+                    </a>
+                    <a class="navitem" id="navBills" runat="server" href="BillList.aspx">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h9l4 4v14a1 1 0 01-1 1H6a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M9 11h6M9 15h6M9 7h3"/></svg>
+                        <span class="navlabel">My Bills</span>
+                    </a>
+                    <a class="navitem" id="navAdd" runat="server" href="AddBill.aspx">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+                        <span class="navlabel">Add Bill</span>
+                    </a>
+                    <a class="navitem" id="navCalendar" runat="server" href="Calendar.aspx">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+                        <span class="navlabel">Calendar</span>
+                    </a>
+                    <a class="navitem" id="navHistory" runat="server" href="PaymentHistory.aspx">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+                        <span class="navlabel">Payment History</span>
+                    </a>
+                    <a class="navitem" id="navReports" runat="server" href="Reports.aspx">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
+                        <span class="navlabel">Reports</span>
+                    </a>
+                    <a class="navitem" id="navProfile" runat="server" href="Profile.aspx">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+                        <span class="navlabel">Profile</span>
+                    </a>
+                    <a class="navitem" id="navSettings" runat="server" href="Settings.aspx">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1-1.6 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.9.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.9V9a1.7 1.7 0 001.5 1h.1a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg>
+                        <span class="navlabel">Settings</span>
+                    </a>
+                </div>
+                <div class="navfoot">
+                    <a class="navitem logout" href="Logout.aspx">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+                        <span class="navlabel">Logout</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mainwrap">
+                <div class="topbar">
+                    <button type="button" class="hamburger" id="btnHamburger" onclick="toggleSidebar()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+                    </button>
+                    <div class="topbar-right">
+                        <div class="bell-wrap">
+                            <a class="bell-link" href="Reminders.aspx" title="Reminders">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 1112 0c0 7 3 9 3 9H3s3-2 3-9z"/><path d="M10.3 21a1.94 1.94 0 003.4 0"/></svg>
+                                <asp:Literal ID="litBellBadge" runat="server" />
+                            </a>
+                        </div>
+                        <div class="userchip" onclick="toggleUserMenu(event)">
+                            <div class="avatar"><asp:Literal ID="litAvatar" runat="server" /></div>
+                            <asp:Literal ID="litUserName" runat="server" />
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                            <div class="userchip-menu" id="userMenu">
+                                <a href="Profile.aspx">Profile</a>
+                                <a href="Settings.aspx">Settings</a>
+                                <a href="Logout.aspx" class="danger">Log out</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page">
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        function toggleSidebar() {
+            var sb = document.getElementById('sidebar');
+            sb.classList.toggle('collapsed');
+            localStorage.setItem('brs-sidebar-collapsed', sb.classList.contains('collapsed') ? '1' : '0');
+        }
+        (function () {
+            if (localStorage.getItem('brs-sidebar-collapsed') === '1') {
+                document.getElementById('sidebar').classList.add('collapsed');
+            }
+        })();
+        function toggleUserMenu(e) {
+            e.stopPropagation();
+            document.getElementById('userMenu').classList.toggle('open');
+        }
+        document.addEventListener('click', function () {
+            document.getElementById('userMenu').classList.remove('open');
+        });
+
+        // ---- Desktop / device notifications for bills nearing their due date ----
+        function checkAndNotify() {
+            if (!('Notification' in window)) return;
+            if (Notification.permission !== 'granted') return;
+            if (!brsAlerts || brsAlerts.length === 0) return;
+
+            var today = new Date().toISOString().slice(0, 10);
+            brsAlerts.forEach(function (alert) {
+                var key = 'brs-notified-' + alert.id + '-' + today;
+                if (localStorage.getItem(key)) return; // already notified today
+                var n = new Notification(alert.title, {
+                    body: alert.body,
+                    tag: alert.id,
+                    icon: undefined
+                });
+                n.onclick = function () { window.focus(); n.close(); };
+                localStorage.setItem(key, '1');
+            });
+        }
+
+        function enableBillNotifications(callback) {
+            if (!('Notification' in window)) {
+                if (callback) callback('unsupported');
+                return;
+            }
+            if (Notification.permission === 'granted') {
+                checkAndNotify();
+                if (callback) callback('granted');
+                return;
+            }
+            Notification.requestPermission().then(function (perm) {
+                if (perm === 'granted') checkAndNotify();
+                if (callback) callback(perm);
+            });
+        }
+
+        // If the user already granted permission on a previous visit, fire silently.
+        if ('Notification' in window && Notification.permission === 'granted') {
+            checkAndNotify();
+        }
+    </script>
+</body>
+</html>
